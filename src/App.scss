@@ -1,0 +1,19 @@
+:root {
+  --bg-color: hsl(0, 0%, 98%);
+  --bg-elements: hsl(0, 0%, 100%);
+  --color-text: hsl(200, 15%, 8%);
+  --color-input: hsl(0, 0%, 42%);
+  --bg-shadow: hsl(0, 0%, 72%);
+}
+[data-theme="dark"] {
+  --bg-color: hsl(207, 26%, 17%);
+  --bg-elements: hsl(209, 23%, 22%);
+  --color-text: hsl(0, 0%, 100%);
+  --color-input: hsl(0, 0%, 100%);
+  --bg-shadow: hsl(200, 15%, 10%);
+}
+
+.App {
+  text-align: center;
+  color: var(--color-text);
+}

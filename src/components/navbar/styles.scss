@@ -1,0 +1,38 @@
+.header {
+  padding: 20px 0;
+  background: var(--bg-elements);
+  color: var(--color-text);
+  box-shadow: 0 0.6rem 0.5rem -0.5rem rgba(0, 0, 0, 0.2);
+
+  .logo {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 23px;
+    vertical-align: middle;
+
+    @media screen and (max-width: 600px) {
+      font-size: 18px;
+    }
+  }
+  .dark-mode-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 15px;
+    cursor: pointer;
+    outline: 0;
+    &:hover {
+      background: var(--bg-color);
+    }
+    span {
+      vertical-align: middle;
+      padding-left: 5px;
+    }
+    svg {
+      vertical-align: middle;
+    }
+  }
+}
