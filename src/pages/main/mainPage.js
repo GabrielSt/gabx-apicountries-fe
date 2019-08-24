@@ -5,12 +5,11 @@ import CountryCard from "../../components/countryCard";
 import "./styles.scss";
 
 const MainPage = () => {
-  const [countries, setcountries] = useState();
+  const [countries, setCountries] = useState();
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCountries();
-      setcountries(data);
-      console.log(countries);
+      setCountries(data);
     };
     fetchData();
   }, []);
