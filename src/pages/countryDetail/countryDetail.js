@@ -100,7 +100,6 @@ const CountryDetail = props => {
                           <div className="borders">
                             {country.borders.map((border, i) => {
                               const countryBorder = borderName(border);
-                              console.log("x", countryBorder);
                               return (
                                 <Link
                                   key={i}

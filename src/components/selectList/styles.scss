@@ -1,0 +1,16 @@
+.select-box {
+  //   position: relative;
+  //   width: 100%;
+  //   display: inline-block;
+  //   vertical-align: middle;
+  //   text-align: left;
+  //   user-select: none;
+  //   font-size: 12px;
+  //   z-index: 10;
+  background-color: var(--bg-elements);
+  color: var(--color-text);
+}
+
+.Select--multi .Select-value {
+  background-color: var(--bg-elements);
+}

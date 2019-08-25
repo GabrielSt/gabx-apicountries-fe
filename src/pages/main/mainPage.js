@@ -1,14 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CountryCard from "../../components/countryCard";
 import { useCountriesContext } from "../../countriesContext";
+import SelectList from "../../components/selectList";
+import _ from "lodash";
 
 import "./styles.scss";
 
 const MainPage = () => {
   const { countries, fetchCountries } = useCountriesContext();
+  const [filteredCountries, setFilteredContries] = useState();
+
+  const filterByRegion = region => {
+    const coutriesByRegion = _.filter(countries, { region: region });
+    setFilteredContries(coutriesByRegion);
+  };
 
   useEffect(() => {
-    if (!countries) fetchCountries();
+    if (!countries) {
+      fetchCountries();
+    } else {
+      setFilteredContries(countries);
+    }
   }, [countries, fetchCountries]);
 
   return (
@@ -26,51 +38,29 @@ const MainPage = () => {
                   <span>Search Here</span>
                 </div>
                 <div className="col col--6 col__lg--2">
-                  {/* <Dropdown
-                    placeholder="Filter by region"
+                  <SelectList
+                    placeholder="Filter by Region"
                     items={[
-                      { value: "Africa", id: 1 },
-                      { value: "America", id: 2 },
-                      { value: "Asia", id: 3 },
-                      { value: "Europe", id: 4 },
-                      { value: "Oceania", id: 5 }
+                      { value: "Africa", label: "Africa" },
+                      { value: "Americas", label: "Americas" },
+                      { value: "Asia", label: "Asia" },
+                      { value: "Europe", label: "Europe" },
+                      { value: "Oceania", label: "Oceania" }
                     ]}
-                    onChange={this.filterUpdated}
-                  /> */}
-                  <span>Dropdown Here</span>
+                    onChange={filterByRegion}
+                  />
                 </div>
               </div>
             </div>
             <div className="countries-list">
               <div className="flex">
-                {/* {chunk(filtered.slice(0, this.state.postsToShow)).map(
-                  (chunk, i) =>
-                    chunk.map(node => (
-                      <CountryBox key={`chunk-${i}`} country={node.node} />
-                    ))
-                )} */}
-                {countries ? (
-                  <CountryCard key={1} country={countries[0]} />
+                {filteredCountries ? (
+                  filteredCountries.map(country => (
+                    <CountryCard key={1} country={country} />
+                  ))
                 ) : (
                   <div />
                 )}
-
-                <div className="col--12 load-more">
-                  {/* {!this.state.showingMore && (
-                    <div
-                      data-testid="load-more"
-                      className="btn-load-mode"
-                      onClick={() => {
-                        this.setState({
-                          postsToShow: this.state.postsToShow + 12,
-                          showingMore: true
-                        });
-                      }}
-                    >
-                      Load More
-                    </div>
-                  )} */}
-                </div>
               </div>
             </div>
           </div>
