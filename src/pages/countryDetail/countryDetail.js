@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MdKeyboardBackspace } from "react-icons/md";
+import _ from "lodash";
 
 import { getCountry } from "../../services/countries";
+import { useCountriesContext } from "../../countriesContext";
 
 import "./styles.scss";
 
 const CountryDetail = props => {
+  const { countries, fetchCountries } = useCountriesContext();
   const alpha = props.match.params.alpha;
   const [country, setCountry] = useState();
+
+  const borderName = code => {
+    return _.find(countries, country => {
+      return country.alpha3Code === code;
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCountry(alpha);
       setCountry(data);
-      console.log("country", data);
+      if (!countries) await fetchCountries();
     };
     fetchData();
-  }, [alpha]);
-  if (country) {
+  }, [alpha, countries, fetchCountries]);
+
+  if (country && countries) {
     return (
       <section className="country-details">
         <div className="container">
@@ -88,22 +98,20 @@ const CountryDetail = props => {
                             <strong>Border countries: </strong>
                           </p>
                           <div className="borders">
-                            {/* {country.borders.map((border, i) => {
-                                const { node } = this.borderName(border)
-                                return (
-                                  <Link
-                                    key={i}
-                                    to={`/country/${slug(node.name, {
-                                      lower: true,
-                                    })}`}
-                                    title={node.name}
-                                  >
-                                    <div className="country-border">
-                                      <span>{node.name}</span>
-                                    </div>
-                                  </Link>
-                                )
-                              })} */}
+                            {country.borders.map((border, i) => {
+                              const countryBorder = borderName(border);
+                              console.log("x", countryBorder);
+                              return (
+                                <Link
+                                  key={i}
+                                  to={`/country/${countryBorder.alpha3Code}`}
+                                >
+                                  <div className="country-border">
+                                    <span>{countryBorder.name}</span>
+                                  </div>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>

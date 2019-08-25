@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { getCountries } from "../../services/countries";
+import React, { useEffect } from "react";
 import CountryCard from "../../components/countryCard";
+import { useCountriesContext } from "../../countriesContext";
 
 import "./styles.scss";
 
 const MainPage = () => {
-  const [countries, setCountries] = useState();
+  const { countries, fetchCountries } = useCountriesContext();
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getCountries();
-      setCountries(data);
-    };
-    fetchData();
-  }, []);
+    if (!countries) fetchCountries();
+  }, [countries, fetchCountries]);
 
   return (
     <section className="countries main">
