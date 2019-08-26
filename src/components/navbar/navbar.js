@@ -28,8 +28,15 @@ const Navbar = () => {
             </div>
             <div className="col">
               <button className="dark-mode-btn" onClick={toogleTheme}>
-                {darkMode ? <FaMoon /> : <FaRegMoon />}
-                <span>Dark Mode</span>
+                {darkMode ? (
+                  <>
+                    <FaMoon /> <span>Light Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <FaRegMoon /> <span>Dark Mode</span>{" "}
+                  </>
+                )}
               </button>
             </div>
           </div>

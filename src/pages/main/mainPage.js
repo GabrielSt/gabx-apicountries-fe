@@ -19,7 +19,6 @@ const MainPage = () => {
   };
 
   const filterByTerm = term => {
-    console.log("term", term);
     if (term !== "") {
       const coutriesByTerm = _.filter(countries, function(contry) {
         return _.includes(contry.name.toLowerCase(), term.toLowerCase());
@@ -46,7 +45,10 @@ const MainPage = () => {
             <div className="countries-filters">
               <div className="flex flex--between">
                 <div className="col col--12 col__lg--5">
-                  <SearchField onChange={filterByTerm} />
+                  <SearchField
+                    onChange={filterByTerm}
+                    placeholder="Search for a country..."
+                  />
                 </div>
                 <div className="col col--6 col__lg--2">
                   <SelectList
