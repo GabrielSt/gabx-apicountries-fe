@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+
 import CountryCard from "../../components/countryCard";
 import { useCountriesContext } from "../../countriesContext";
 import SelectList from "../../components/selectList";
+import SearchField from "../../components/searchField";
+
 import _ from "lodash";
 
 import "./styles.scss";
@@ -13,6 +16,18 @@ const MainPage = () => {
   const filterByRegion = region => {
     const coutriesByRegion = _.filter(countries, { region: region });
     setFilteredContries(coutriesByRegion);
+  };
+
+  const filterByTerm = term => {
+    console.log("term", term);
+    if (term !== "") {
+      const coutriesByTerm = _.filter(countries, function(contry) {
+        return _.includes(contry.name.toLowerCase(), term.toLowerCase());
+      });
+      setFilteredContries(coutriesByTerm);
+    } else {
+      setFilteredContries(countries);
+    }
   };
 
   useEffect(() => {
@@ -31,11 +46,7 @@ const MainPage = () => {
             <div className="countries-filters">
               <div className="flex flex--between">
                 <div className="col col--12 col__lg--5">
-                  {/* <Search
-                    onChange={this.searchUpdated}
-                    onReset={this.resetSearch}
-                  /> */}
-                  <span>Search Here</span>
+                  <SearchField onChange={filterByTerm} />
                 </div>
                 <div className="col col--6 col__lg--2">
                   <SelectList
